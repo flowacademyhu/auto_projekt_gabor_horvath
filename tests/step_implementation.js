@@ -29,6 +29,7 @@ const {
     button,
     to,
     clear,
+    focus,
 } = require('taiko');
 const assert = require("assert");
 const exp = require('constants');
@@ -244,13 +245,13 @@ step("Check the basket pop-up window elemnts", async function() {
 });
 
 step("Must display the toast messege", async function() {
-	expect(await $('div#toast-container')).exists().to.be.ok;
+	await click($(`button.shop-to-cart-button.shop-to-cart-button--vlg.product__to-cart-button`));
+    expect(await $('div#toast-container').exists()).to.be.ok;
 });
 
 step("Delet the default value on the input field", async function() {
-    await click($(`div.product__delivery-cta-wrapper input.shop-to-cart-quantity__input`));
-    expect(await $(`div.product__delivery-cta-wrapper input.shop-to-cart-quantity__input`).exists()).to.be.ok;
-    await press('Backspace', {waitForEvents: ['DOMContentLoaded']});
+    await focus($(`div.product__delivery-cta-wrapper input.shop-to-cart-quantity__input`));
+    await clear($(`div.product__delivery-cta-wrapper input.shop-to-cart-quantity__input`));
 });
 
 step("Write wrong value the input field", async function() {
@@ -258,13 +259,13 @@ step("Write wrong value the input field", async function() {
 });
 
 step("Must have 'NaN' text the input field", async function() {
-    await click($(`button.shop-to-cart-button.shop-to-cart-button--vlg.product__to-cart-button`));
     waitFor("div.toast-title")
     expect(await $(`div.product-main-details__block.product__delivery-cta-wrapper input.shop-to-cart-quantity__input`).text()).to.contain('NaN');
 });
 
 step("Check the toast message elemnts", async function() {
-	expect(await $(`div.toast-title`).text()).to.contain('Nem megfelelő darabszám!');
+	await click($(`button.shop-to-cart-button.shop-to-cart-button--vlg.product__to-cart-button`));
+    expect(await $(`div.toast-title`).text()).to.contain('Nem megfelelő darabszám!');
 });
 
 step("Click the 'Értesítést kérek' button", async function() {
@@ -373,7 +374,8 @@ step("Check the 'Ipon kiterjesztett garancia' section", async function() {
 });
 
 step("Choose the radio button of the '+1 év garancia (7 295 Ft)'", async function() {
-    await click($(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1)`));
+    //await focus($(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1)`));
+    await click($(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1) > span:nth-child(2)`));
 });
 
 step("The extended warranty price will be added the product price", async function() {
