@@ -449,5 +449,5 @@ step("Checke the 'Bejelentkezés' pop-up window elements", async function() {
 });
 
 step("The radio button is not choose", async function() {
-	expect(await $(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1) > span:nth-child(2)`).exists()).to.not.active;
+	expect(await $(`div.product__price-wrapper div.product__guarantee-value`).isDisabled()).to.be.ok;
 });
