@@ -239,8 +239,8 @@ step("Check the basket pop-up window elemnts", async function() {
     expect(await $(`#checkout-related-products-popup div.modal-header`).text()).to.contain('IPON KITERJESZTETT GARANCIA');
     expect(await $(`p.related-products-modal__info`).text()).to.contain('Szeretnéd teljes biztonságban tudni új eszközödet? iPon kiterjesztett garanciával még nyugodtabb a jövő!');
     expect(await $(`div.tabs-wrapper:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)`).text()).to.contain('iPon kiterjesztett garancia');
-    expect(await radioButton('+1 év garancia (7 955 Ft)').exists()).to.be.ok;
-    expect(await radioButton('+2 év garancia (22 539 Ft)').exists()).to.be.ok;
+    expect(await radioButton('+1 év garancia (7 295 Ft)').exists()).to.be.ok;
+    expect(await radioButton('+2 év garancia (20 669 Ft)').exists()).to.be.ok;
     expect(await button('Tovább').exists()).to.be.ok;
 });
 
@@ -264,7 +264,6 @@ step("Must have 'NaN' text the input field", async function() {
 });
 
 step("Check the toast message elemnts", async function() {
-	await click($(`button.shop-to-cart-button.shop-to-cart-button--vlg.product__to-cart-button`));
     expect(await $(`div.toast-title`).text()).to.contain('Nem megfelelő darabszám!');
 });
 
@@ -374,7 +373,7 @@ step("Check the 'Ipon kiterjesztett garancia' section", async function() {
 });
 
 step("Choose the radio button of the '+1 év garancia (7 295 Ft)'", async function() {
-    //await focus($(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1)`));
+    //await focus($(`div.product__guarantee div.tabs-wrapper ul.list--unstyled.list--items-with-offset`));
     await click($(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1) > span:nth-child(2)`));
 });
 
@@ -448,7 +447,6 @@ step("Checke the 'Bejelentkezés' pop-up window elements", async function() {
     expect(await link('APPLE BELÉPÉS / REGISZTRÁCIÓ').exists()).to.be.ok;
     expect(await link('BEJELENTKEZÉS MAGIC LINKKEL').exists()).to.be.ok;
 });
-
 
 step("The radio button is not choose", async function() {
 	expect(await $(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1) > span:nth-child(2)`).exists()).to.not.active;
