@@ -21,7 +21,7 @@ Setup step:
 
 ## Add extended warranty
 * Check the 'Ipon kiterjesztett garancia' section 
-* Choose the radio button of the '+1 év garancia (7 295 Ft)'
+* Choose the radio button of the '+1 év garancia'
 * The extended warranty price will be added the product price
 * Click on the red x icon after the product price
 * Check the extended warranty price has been deleted from the product price
