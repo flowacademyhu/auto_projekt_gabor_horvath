@@ -214,7 +214,7 @@ step("Write out category names", {countinueOnFailer : true}, async function() {
     expect(await categoryList[0].text()).to.equal("Gépösszerakó");
     assert.strictEqual(await categoryList[0].text(), "Gépösszerakó");
     expect(await categoryList[0].text() == "Gépösszerakó").to.be.ok;
-    expect(categoryList).to.have.lengthOf(1);
+    //expect(categoryList).to.have.lengthOf(1);
     expect(categoryList.lenght == 10).to.be.ok;
     /*for (let category of categoryList) {
         let szoveg = await category.text();
@@ -239,8 +239,8 @@ step("Check the basket pop-up window elemnts", async function() {
     expect(await $(`#checkout-related-products-popup div.modal-header`).text()).to.contain('IPON KITERJESZTETT GARANCIA');
     expect(await $(`p.related-products-modal__info`).text()).to.contain('Szeretnéd teljes biztonságban tudni új eszközödet? iPon kiterjesztett garanciával még nyugodtabb a jövő!');
     expect(await $(`div.tabs-wrapper:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)`).text()).to.contain('iPon kiterjesztett garancia');
-    expect(await radioButton('+1 év garancia (7 295 Ft)').exists()).to.be.ok;
-    expect(await radioButton('+2 év garancia (20 669 Ft)').exists()).to.be.ok;
+    expect(await radioButton('+1 év garancia (7 643 Ft)').exists()).to.be.ok;
+    expect(await radioButton('+2 év garancia (21 655 Ft)').exists()).to.be.ok;
     expect(await button('Tovább').exists()).to.be.ok;
 });
 
@@ -372,13 +372,13 @@ step("Check the 'Ipon kiterjesztett garancia' section", async function() {
     expect(await $(`div.product__guarantee div.tabs-wrapper`).exists()).to.be.ok;
 });
 
-step("Choose the radio button of the '+1 év garancia (7 295 Ft)'", async function() {
-    //await focus($(`div.product__guarantee div.tabs-wrapper ul.list--unstyled.list--items-with-offset`));
-    await click($(`div.tabs-wrapper:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(1) > label:nth-child(1) > span:nth-child(2)`));
+step("Choose the radio button of the '+1 év garancia'", async function() {
+    //await focus(radioButton('+1 év garancia (7 643 Ft)'));
+    await click('+1 év garancia (7 643 Ft)');
 });
 
 step("The extended warranty price will be added the product price", async function() {
-    expect(await $(`div.product__price-wrapper div.product__guarantee-value`).text()).to.contain('+1 év iPon kiterjesztett garancia (7 295 Ft)');
+    expect(await $(`div.product__price-wrapper div.product__guarantee-value`).text()).to.contain('+1 év iPon kiterjesztett garancia (7 643 Ft)');
 });
 
 step("Click on the red x icon after the product price", async function() {
@@ -386,7 +386,7 @@ step("Click on the red x icon after the product price", async function() {
 });
 
 step("Check the extended warranty price has been deleted from the product price", async function() {
-    expect(await $(`div.product__price-wrapper div.product__guarantee-price`).isDisabled()).to.be.ok;
+    expect(await $(`div.product__price-wrapper div.product__guarantee-price`).exists()).to.equal(false);
 });
 
 step("Close the 'Értesítést kérek' pop-up window", async function() {
@@ -398,7 +398,7 @@ step("Check the 'SPECIFIKÁCIÓ' section", async function() {
 });
 
 step("Click the 'Teljes specifikáció' button", async function() {
-	await click($(`div.product-box__accordion__control--specification div.layout-box__footer i.fas.fa-arrow-down`, {waitForEvents: ['DOMContentLoaded']}));
+	await click($(`div.product-box__accordion__control--specification div.layout-box__footer i.fa-arrow-down`, {waitForEvents: ['DOMContentLoaded']}));
 });
 
 step("Check the all specification is shown", async function() {
@@ -406,11 +406,11 @@ step("Check the all specification is shown", async function() {
 });
 
 step("Click the 'Mutass kevesebbet' button", async function() {
-	await click($(`div.product-box__accordion__control--specification div.layout-box__footer i.fas.fa-arrow-up`));
+	await click($(`div.product-box__accordion__control--specification div.layout-box__footer i.fa-arrow-up`));
 });
 
 step("Check the shown specification is less", async function() {
-    expect(await $(`div.product-box__accordion__control.product-box__accordion__control--specification div.product__link`).text()).to.contain('Teljes specifikáció')
+    expect(await $(`div.grid-col-1.grid-col-lg-5-12 div.product-box__accordion.open`).exists()).to.equal(false)
 });
 
 step("Scroll down at the bottom of the page", async function() {
@@ -449,5 +449,31 @@ step("Checke the 'Bejelentkezés' pop-up window elements", async function() {
 });
 
 step("The radio button is not choose", async function() {
-	expect(await $(`div.product__price-wrapper div.product__guarantee-value`).isDisabled()).to.be.ok;
+	expect(await $(`div.product__price-wrapper div.product__guarantee-value`).exists()).to.equal(false);
+});
+
+//Horváth Gábor 
+
+
+step("Search tablet word", async function() {
+	await click($(`a.btnx.cookies-info__button.js-cookies-info-close`));
+    await click($(`input#edtSearch`));
+    await write('tablet', $(`input#edtSearch`));
+    await press('Enter', {waitForEvents: ['DOMContentLoaded']});
+    expect(await $(`#lblNumberItem`).text()).to.contain(228);
+});
+
+
+step("Open the result page 2nd product", async function() {
+	//await click($(`div#vendor-close.fa-times`));
+    await click($(`img#img6731095`));
+    //await click($(`div#vendor-close.fa-times`));
+    expect(await $(`div.title-cnt`).exists()).to.equal(true);
+    expect(await $(`tr.pricenormal td.c2`).exists()).to.equal(true);
+});
+
+step("Click the basket button", async function() {
+	await click($(`a.btnx.normal.green.buy.single`));
+    expect(await $(`a.productInfo__texts__message`).text()).to.contain('A termékeket a kosárba helyeztük.');
+    await goBack();
 });
